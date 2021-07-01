@@ -1,178 +1,233 @@
 import collections
-import time
+import statistics
 from nba_api.stats.endpoints import teamgamelogs
-from nba_api.stats.endpoints import commonplayerinfo
 
 
-def calculate_threes(df):
+def calculate_threes(player, df):
 
     fgm = {}
+    fgm_list = []
 
     for game in df.values:
 
-        if (game[5] in fgm.keys()):
-            fgm.update({game[5]: (fgm.get(game[5]) + 1)})
+        fgm_list.append(game[5])
+
+        if (game[5] in fgm):
+            fgm[game[5]] = fgm[game[5]] + 1
         else:
-            fgm.update({game[5]: 1})
+            fgm[game[5]] = 1
 
     fgm = collections.OrderedDict(sorted(fgm.items()))
 
-    for key in fgm.keys():
-        fgm.update({key: (fgm.get(key)/len(df.values))})
+    for key in fgm:
+        fgm[key] = (fgm[key]/len(df.values))
 
     expected_value = 0
 
-    for key in fgm.keys():
-        expected_value += (key * fgm.get(key))
+    for key in fgm:
+        expected_value += (key * fgm[key])
 
-    return expected_value
+    if len(fgm_list) == 1:
+        fgm_list.append(fgm_list[0])
+
+    player.set_expected_threes(expected_value)
+    player.set_average_threes(statistics.mean(fgm_list))
+    player.set_std_deviation_threes(statistics.stdev(fgm_list))
 
 
-def calculate_pts(df):
+def calculate_pts(player, df):
 
     pts = {}
+    pts_list = []
 
     for game in df.values:
 
-        if (game[11] in pts.keys()):
-            pts.update({game[11]: (pts.get(game[11]) + 1)})
+        pts_list.append(game[11])
+
+        if (game[11] in pts):
+            pts[game[11]] = pts[game[11]] + 1
         else:
-            pts.update({game[11]: 1})
+            pts[game[11]] = 1
 
     pts = collections.OrderedDict(sorted(pts.items()))
 
-    for key in pts.keys():
-        pts.update({key: (pts.get(key)/len(df.values))})
+    for key in pts:
+        pts[key] = pts[key]/len(df.values)
 
     expected_pts = 0
 
-    for key in pts.keys():
-        expected_pts += (key * pts.get(key))
+    for key in pts:
+        expected_pts += (key * pts[key])
 
-    return expected_pts
+    if len(pts_list) == 1:
+        pts_list.append(pts_list[0])
+
+    player.set_expected_pts(expected_pts)
+    player.set_average_pts(statistics.mean(pts_list))
+    player.set_std_deviation_pts(statistics.stdev(pts_list))
 
 
-def calculate_rebounds(df):
+def calculate_rebounds(player, df):
 
     rebounds = {}
+    rebounds_list = []
 
     for game in df.values:
 
-        if (game[6] in rebounds.keys()):
-            rebounds.update({game[6]: (rebounds.get(game[6]) + 1)})
+        rebounds_list.append(game[6])
+
+        if (game[6] in rebounds):
+            rebounds[game[6]] = rebounds[game[6]] + 1
         else:
-            rebounds.update({game[6]: 1})
+            rebounds[game[6]] = 1
 
     rebounds = collections.OrderedDict(sorted(rebounds.items()))
 
-    for key in rebounds.keys():
-        rebounds.update({key: (rebounds.get(key)/len(df.values))})
+    for key in rebounds:
+        rebounds[key] = (rebounds[key]/len(df.values))
 
     expected_rebounds = 0
 
-    for key in rebounds.keys():
-        expected_rebounds += (key * rebounds.get(key))
+    for key in rebounds:
+        expected_rebounds += (key * rebounds[key])
 
-    return expected_rebounds
+    if len(rebounds_list) == 1:
+        rebounds_list.append(rebounds_list[0])
+
+    player.set_expected_rebounds(expected_rebounds)
+    player.set_average_rebounds(statistics.mean(rebounds_list))
+    player.set_std_deviation_rebounds(statistics.stdev(rebounds_list))
 
 
-def calculate_assists(df):
+def calculate_assists(player, df):
 
     assists = {}
+    assists_list = []
 
     for game in df.values:
 
-        if (game[7] in assists.keys()):
-            assists.update({game[7]: (assists.get(game[7]) + 1)})
+        assists_list.append(game[7])
+
+        if (game[7] in assists):
+            assists[game[7]] = assists[game[7]] + 1
         else:
-            assists.update({game[7]: 1})
+            assists[game[7]] = 1
 
     assists = collections.OrderedDict(sorted(assists.items()))
 
-    for key in assists.keys():
-        assists.update({key: (assists.get(key)/len(df.values))})
+    for key in assists:
+        assists[key] = assists[key]/len(df.values)
 
     expected_assists = 0
 
-    for key in assists.keys():
-        expected_assists += (key * assists.get(key))
+    for key in assists:
+        expected_assists += (key * assists[key])
 
-    return expected_assists
+    if len(assists_list) == 1:
+        assists_list.append(assists_list[0])
+
+    player.set_expected_assists(expected_assists)
+    player.set_average_assists(statistics.mean(assists_list))
+    player.set_std_deviation_assists(statistics.stdev(assists_list))
 
 
-def calculate_steals(df):
+def calculate_steals(player, df):
 
     steals = {}
+    steals_list = []
 
     for game in df.values:
 
-        if (game[9] in steals.keys()):
-            steals.update({game[9]: (steals.get(game[9]) + 1)})
+        steals_list.append(game[9])
+
+        if (game[9] in steals):
+            steals[game[9]] = steals[game[9]] + 1
         else:
-            steals.update({game[9]: 1})
+            steals[game[9]] = 1
 
     steals = collections.OrderedDict(sorted(steals.items()))
 
-    for key in steals.keys():
-        steals.update({key: (steals.get(key)/len(df.values))})
+    for key in steals:
+        steals[key] = steals[key]/len(df.values)
 
     expected_steals = 0
 
-    for key in steals.keys():
-        expected_steals += (key * steals.get(key))
+    for key in steals:
+        expected_steals += (key * steals[key])
 
-    return expected_steals
+    if len(steals_list) == 1:
+        steals_list.append(steals_list[0])
+
+    player.set_expected_steals(expected_steals)
+    player.set_average_steals(statistics.mean(steals_list))
+    player.set_std_deviation_steals(statistics.stdev(steals_list))
 
 
-def calculate_blocks(df):
+def calculate_blocks(player, df):
 
     blocks = {}
+    blocks_list = []
 
     for game in df.values:
 
-        if (game[10] in blocks.keys()):
-            blocks.update({game[10]: (blocks.get(game[10]) + 1)})
+        blocks_list.append(game[10])
+
+        if (game[10] in blocks):
+            blocks[game[10]] = blocks[game[10]] + 1
         else:
-            blocks.update({game[10]: 1})
+            blocks[game[10]] = 1
 
     blocks = collections.OrderedDict(sorted(blocks.items()))
 
-    for key in blocks.keys():
-        blocks.update({key: (blocks.get(key)/len(df.values))})
+    for key in blocks:
+        blocks[key] = blocks[key]/len(df.values)
 
     expected_blocks = 0
 
-    for key in blocks.keys():
-        expected_blocks += (key * blocks.get(key))
+    for key in blocks:
+        expected_blocks += (key * blocks[key])
 
-    return expected_blocks
+    if len(blocks_list) == 1:
+        blocks_list.append(blocks_list[0])
+
+    player.set_expected_blocks(expected_blocks)
+    player.set_average_blocks(statistics.mean(blocks_list))
+    player.set_std_deviation_blocks(statistics.stdev(blocks_list))
 
 
-def calculate_turnovers(df):
+def calculate_turnovers(player, df):
 
     turnovers = {}
+    turnovers_list = []
 
     for game in df.values:
 
-        if (game[8] in turnovers.keys()):
-            turnovers.update({game[8]: (turnovers.get(game[8]) + 1)})
+        turnovers_list.append(game[8])
+
+        if (game[8] in turnovers):
+            turnovers[game[8]] = turnovers[game[8]] + 1
         else:
-            turnovers.update({game[8]: 1})
+            turnovers[game[8]] = 1
 
     turnovers = collections.OrderedDict(sorted(turnovers.items()))
 
-    for key in turnovers.keys():
-        turnovers.update({key: (turnovers.get(key)/len(df.values))})
+    for key in turnovers:
+        turnovers[key] = turnovers[key]/len(df.values)
 
     expected_turnovers = 0
 
-    for key in turnovers.keys():
-        expected_turnovers += (key * turnovers.get(key))
+    for key in turnovers:
+        expected_turnovers += (key * turnovers[key])
 
-    return expected_turnovers
+    if len(turnovers_list) == 1:
+        turnovers_list.append(turnovers_list[0])
+
+    player.set_expected_turnovers(expected_turnovers)
+    player.set_average_turnovers(statistics.mean(turnovers_list))
+    player.set_std_deviation_turnovers(statistics.stdev(turnovers_list))
 
 
-def calculate_minutes(df, team_id):
+def calculate_minutes(player, df, team_id):
 
     minutes = {}
 
@@ -182,10 +237,10 @@ def calculate_minutes(df, team_id):
 
         player_id = game[1]
 
-        if (game[4] in minutes.keys()):
-            minutes.update({game[4]: (minutes.get(game[4]) + 1)})
+        if (game[4] in minutes):
+            minutes[game[4]] = minutes[game[4]] + 1
         else:
-            minutes.update({game[4]: 1})
+            minutes[game[4]] = 1
 
     minutes = collections.OrderedDict(sorted(minutes.items()))
 
@@ -194,12 +249,12 @@ def calculate_minutes(df, team_id):
 
     num_games = len(team_logs[0].values)
 
-    for key in minutes.keys():
-        minutes.update({key: (minutes.get(key)/num_games)})
+    for key in minutes:
+        minutes[key] = minutes[key]/num_games
 
     expected_minutes = 0
 
-    for key in minutes.keys():
-        expected_minutes += (key * minutes.get(key))
+    for key in minutes:
+        expected_minutes += (key * minutes[key])
 
-    return expected_minutes
+    player.set_expected_minutes(expected_minutes)

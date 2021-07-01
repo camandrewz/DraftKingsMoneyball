@@ -1,40 +1,60 @@
-import math
+from src import Lineup
+import hashlib
+import bisect
 
-top_ten_lineups = [
-    {"PG": {}, "SG": {}, "SF": {}, "PF": {}, "C": {}, "GUARD": {},
-     "FORWARD": {}, "UTIL": {}, "PRJ": 0, "PRJ*MIN": 0, "COST": 0},
-    {"PG": {}, "SG": {}, "SF": {}, "PF": {}, "C": {}, "GUARD": {},
-     "FORWARD": {}, "UTIL": {}, "PRJ": 0, "PRJ*MIN": 0, "COST": 0},
-    {"PG": {}, "SG": {}, "SF": {}, "PF": {}, "C": {}, "GUARD": {},
-     "FORWARD": {}, "UTIL": {}, "PRJ": 0, "PRJ*MIN": 0, "COST": 0},
-    {"PG": {}, "SG": {}, "SF": {}, "PF": {}, "C": {}, "GUARD": {},
-     "FORWARD": {}, "UTIL": {}, "PRJ": 0, "PRJ*MIN": 0, "COST": 0},
-    {"PG": {}, "SG": {}, "SF": {}, "PF": {}, "C": {}, "GUARD": {},
-     "FORWARD": {}, "UTIL": {}, "PRJ": 0, "PRJ*MIN": 0, "COST": 0},
-    {"PG": {}, "SG": {}, "SF": {}, "PF": {}, "C": {}, "GUARD": {},
-     "FORWARD": {}, "UTIL": {}, "PRJ": 0, "PRJ*MIN": 0, "COST": 0},
-    {"PG": {}, "SG": {}, "SF": {}, "PF": {}, "C": {}, "GUARD": {},
-     "FORWARD": {}, "UTIL": {}, "PRJ": 0, "PRJ*MIN": 0, "COST": 0},
-    {"PG": {}, "SG": {}, "SF": {}, "PF": {}, "C": {}, "GUARD": {},
-     "FORWARD": {}, "UTIL": {}, "PRJ": 0, "PRJ*MIN": 0, "COST": 0},
-    {"PG": {}, "SG": {}, "SF": {}, "PF": {}, "C": {}, "GUARD": {},
-     "FORWARD": {}, "UTIL": {}, "PRJ": 0, "PRJ*MIN": 0, "COST": 0},
-    {"PG": {}, "SG": {}, "SF": {}, "PF": {}, "C": {}, "GUARD": {},
-     "FORWARD": {}, "UTIL": {}, "PRJ": 0, "PRJ*MIN": 0, "COST": 0}
-]
+top_n_lineups = []
+top_n_lineups_showdown = []
+
+n = 50
+
+'''
+
+for i in range(0, n):
+    top_n_lineups_showdown.append({"CAPTAIN": {}, "UTIL1": {}, "UTIL2": {}, "UTIL3": {},
+                                   "UTIL4": {}, "UTIL5": {}, "PRJ": 0, "PRJ*MIN": 0, "COST": 0})
+
+    top_n_lineups.append({"PG": {}, "SG": {}, "SF": {}, "PF": {}, "C": {}, "GUARD": {},
+                          "FORWARD": {}, "UTIL": {}, "PRJ": 0, "PRJ*MIN": 0, "COST": 0})
+
+'''
 
 
-def add_to_top_ten(lineup, lineup_score):
+def add_to_top_lineups(lineup, showdown):
 
-    for index, element in enumerate(top_ten_lineups):
+    if showdown:
+        bisect.insort(top_n_lineups_showdown, lineup)
+        if len(top_n_lineups_showdown) > n:
+            del top_n_lineups_showdown[n]
 
-        if (math.isclose(lineup.get("PRJ"), element.get("PRJ"))):
-            return
+    '''
 
-        if (lineup_score > element.get("PRJ")):
-            top_ten_lineups.insert(index, lineup)
-            del top_ten_lineups[10]
-            return
+        for index, element in enumerate(top_n_lineups_showdown):
+            if (lineup.projection > element.projection):
+                top_n_lineups_showdown.insert(index, lineup)
+                del top_n_lineups_showdown[n]
+                return
+
+    else:
+        for index, element in enumerate(top_n_lineups):
+
+            if (lineup_score > element.get("PRJ")):
+                top_n_lineups.insert(index, lineup)
+                del top_n_lineups[n]
+                return
+
+    '''
+
+
+def create_signature(captain, util1, util2, util3, util4, util5):
+
+    names = [captain, util1, util2, util3, util4, util5]
+    names.sort()
+
+    unencoded_str = names[0] + names[1] + names[2] + names[3] + names[4]
+
+    encodedStr = hashlib.md5(unencoded_str.encode()).hexdigest()
+
+    return encodedStr
 
 
 def create_best_lineups(final_dataFrame, point_guards, shooting_guards, small_forwards, power_forwards, centers, all_guards, all_forwards):
@@ -105,8 +125,8 @@ def create_best_lineups(final_dataFrame, point_guards, shooting_guards, small_fo
                                         pf[12] + center[12] + \
                                         guard[12] + forward[12] + util[12]
 
-                                    add_to_top_ten(
-                                        current_lineup, current_lineup.get("PRJ"))
+                                    add_to_top_lineups(
+                                        current_lineup, current_lineup.get("PRJ"), False)
 
                                     current_iteration += 1
 
@@ -115,4 +135,86 @@ def create_best_lineups(final_dataFrame, point_guards, shooting_guards, small_fo
                                             "Current Iteration: " + str(int(current_iteration/1000000)) + ",000,000")
 
     print("Total Lineups Checked: ", current_iteration)
-    return top_ten_lineups
+    return top_n_lineups
+
+
+def create_best_lineups_showdown(all_players):
+
+    print("Creating Lineups...")
+
+    signatures = {}
+
+    current_iteration = 1
+
+    for captain in all_players:
+
+        for util1 in all_players:
+
+            if (util1.name == captain.name):
+                continue
+
+            for util2 in all_players:
+
+                if (util2.name == util1.name or util2.name == captain.name):
+                    continue
+
+                for util3 in all_players:
+
+                    if (util3.name == util1.name or util3.name == util2.name or util3.name == captain.name):
+                        continue
+
+                    for util4 in all_players:
+
+                        if (util4.name == util1.name or util4.name == util2.name or util4.name == util3.name or util4.name == captain.name):
+                            continue
+
+                        for util5 in all_players:
+
+                            if (util5.name == util1.name or util5.name == util2.name or util5.name == util3.name or util5.name == util4.name or util5.name == captain.name):
+                                continue
+
+                            sig = create_signature(
+                                captain.name, util1.name, util2.name, util3.name, util4.name, util5.name)
+
+                            if(sig in signatures):
+                                continue
+                            else:
+                                signatures[sig] = True
+
+                            if ((captain.salary * 1.5) + util1.salary + util2.salary + util3.salary + util4.salary + util5.salary) > 50000:
+                                continue
+
+                            current_iteration += 1
+
+                            if (current_iteration % 10000 == 0):
+                                print(
+                                    "Current Lineup #: " + str(current_iteration))
+
+                            '''
+
+                            current_lineup = {"CAPTAIN": {"NAME": captain[0], "PRJ": (captain[12] * 1.5), "SALARY": (captain.salary * 1.5)},
+                                              "UTIL1": {"NAME": util1[0], "PRJ": util1[12], "SALARY": util1.salary},
+                                              "UTIL2": {"NAME": util2[0], "PRJ": util2[12], "SALARY": util2.salary},
+                                              "UTIL3": {"NAME": util3[0], "PRJ": util3[12], "SALARY": util3.salary},
+                                              "UTIL4": {"NAME": util4[0], "PRJ": util4[12], "SALARY": util4.salary},
+                                              "UTIL5": {"NAME": util5[0], "PRJ": util5[12], "SALARY": util5.salary},
+                                              "PRJ": 0, "PRJ*MIN": 0, "COST": 0}
+
+                            '''
+
+                            current_lineup = Lineup.Lineup(
+                                captain, util1, util2, util3, util4, util5)
+                            current_lineup.set_total_cost()
+                            current_lineup.set_projection()
+
+                            '''
+
+                            current_lineup["PRJ*MIN"] = (
+                                captain[13] * 1.5) + util1[13] + util2[13] + util3[13] + util4[13] + util5[13]
+
+                            '''
+
+                            add_to_top_lineups(current_lineup, True)
+
+    print("Total Valid Lineups Checked: ", current_iteration)
+    return top_n_lineups_showdown

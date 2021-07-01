@@ -1,3 +1,6 @@
+import numpy
+
+
 class Player:
 
     def __init__(self, full_name, position, salary, id):
@@ -10,23 +13,68 @@ class Player:
     def set_expected_threes(self, threes):
         self.expected_3pm = threes
 
+    def set_average_threes(self, threes):
+        self.average_3pm = threes
+
+    def set_std_deviation_threes(self, threes):
+        self.std_dev_3pm = threes
+
     def set_expected_pts(self, pts):
         self.expected_pts = pts
+
+    def set_average_pts(self, pts):
+        self.average_pts = pts
+
+    def set_std_deviation_pts(self, pts):
+        self.std_dev_pts = pts
 
     def set_expected_rebounds(self, rebounds):
         self.expected_rebounds = rebounds
 
+    def set_average_rebounds(self, rebounds):
+        self.average_rebounds = rebounds
+
+    def set_std_deviation_rebounds(self, rebounds):
+        self.std_dev_rebounds = rebounds
+
     def set_expected_assists(self, assists):
         self.expected_assists = assists
+
+    def set_average_assists(self, assists):
+        self.average_assists = assists
+
+    def set_std_deviation_assists(self, assists):
+        self.std_dev_assists = assists
 
     def set_expected_steals(self, steals):
         self.expected_steals = steals
 
+    def set_average_steals(self, steals):
+        self.average_steals = steals
+
+    def set_std_deviation_steals(self, steals):
+        self.std_dev_steals = steals
+
     def set_expected_blocks(self, blocks):
         self.expected_blocks = blocks
 
+    def set_average_blocks(self, blocks):
+        self.average_blocks = blocks
+
+    def set_std_deviation_blocks(self, blocks):
+        self.std_dev_blocks = blocks
+
     def set_expected_turnovers(self, turnovers):
         self.expected_turnovers = turnovers
+
+    def set_average_turnovers(self, turnovers):
+        self.average_turnovers = turnovers
+
+    def set_std_deviation_turnovers(self, turnovers):
+        self.std_dev_turnovers = turnovers
+
+    def set_expected_minutes(self, mins):
+        self.expected_minutes = mins
 
     def set_doubles(self):
 
@@ -77,5 +125,66 @@ class Player:
 
         self.expected_fantasy_points = total_points
 
-    def set_expected_minutes(self, mins):
-        self.expected_minutes = mins
+    def set_random_fantasy_points(self):
+
+        random_3pm = numpy.random.normal(
+            loc=self.average_3pm, scale=self.std_dev_3pm)
+        random_pts = numpy.random.normal(
+            loc=self.average_pts, scale=self.std_dev_pts)
+        random_rebounds = numpy.random.normal(
+            loc=self.average_rebounds, scale=self.std_dev_rebounds)
+        random_assists = numpy.random.normal(
+            loc=self.average_assists, scale=self.std_dev_assists)
+        random_steals = numpy.random.normal(
+            loc=self.average_steals, scale=self.std_dev_steals)
+        random_blocks = numpy.random.normal(
+            loc=self.average_blocks, scale=self.std_dev_blocks)
+        random_turnovers = numpy.random.normal(
+            loc=self.average_turnovers, scale=self.std_dev_turnovers)
+
+        total_points = 0
+        total_points += 1 * random_pts
+        total_points += .5 * random_3pm
+        total_points += 1.25 * random_rebounds
+        total_points += 1.5 * random_assists
+        total_points += 2 * random_steals
+        total_points += 2 * random_blocks
+        total_points -= .5 * random_turnovers
+
+        doubles = 0
+
+        if (random_pts >= 10):
+            doubles += 1
+
+        if (random_rebounds >= 10):
+            doubles += 1
+
+        if (random_assists >= 10):
+            doubles += 1
+
+        if (random_steals >= 10):
+            doubles += 1
+
+        if (random_blocks >= 10):
+            doubles += 1
+
+        double_double = False
+        triple_double = False
+
+        if (doubles >= 3):
+            triple_double = True
+            double_double = True
+        elif (doubles == 2):
+            triple_double = False
+            double_double = True
+        else:
+            triple_double = False
+            double_double = False
+
+        if (double_double):
+            total_points += 1.5
+
+        if (triple_double):
+            total_points += 3
+
+        self.random_fantasy_points = total_points
