@@ -5,7 +5,7 @@ import bisect
 top_n_lineups = []
 top_n_lineups_showdown = []
 
-n = 100
+n = 250
 
 '''
 
@@ -227,7 +227,7 @@ def monte_carlo_simulations(top_lineups, num_simulations):
     total_wins = {}
 
     for lineup in top_lineups:
-        total_wins.update({lineup.signature: 0})
+        total_wins.update({lineup.signature: {"WINS":0, "LOSSES":0, "TIES":0}})
 
     for simulation in range(0, num_simulations):
 
@@ -239,6 +239,9 @@ def monte_carlo_simulations(top_lineups, num_simulations):
         for lineup in top_lineups:
             for lineup2 in top_lineups:
 
+                if lineup.signature == lineup2.signature:
+                    continue
+
                 combined_hash = [lineup.signature, lineup2.signature]
                 combined_hash.sort()
                 combined_hash_str = combined_hash[0] + combined_hash[1]
@@ -248,12 +251,14 @@ def monte_carlo_simulations(top_lineups, num_simulations):
                 else:
                     previous_matches.update({combined_hash_str: True})
 
-                if lineup.signature == lineup2.signature:
-                    continue
-
                 if lineup.random_projection > lineup2.random_projection:
-                    total_wins[lineup.signature] = total_wins[lineup.signature] + 1
-                else:
-                    total_wins[lineup2.signature] = total_wins[lineup2.signature] + 1
+                    total_wins[lineup.signature]["WINS"] = total_wins[lineup.signature]["WINS"] + 1
+                    total_wins[lineup2.signature]["LOSSES"] = total_wins[lineup2.signature]["LOSSES"] + 1
+                elif lineup2.random_projection > lineup.random_projection:
+                    total_wins[lineup2.signature]["WINS"] = total_wins[lineup2.signature]["WINS"] + 1
+                    total_wins[lineup.signature]["LOSSES"] = total_wins[lineup.signature]["LOSSES"] + 1
+                elif lineup.random_projection == lineup2.random_projection:
+                    total_wins[lineup2.signature]["TIES"] = total_wins[lineup2.signature]["TIES"] + 1
+                    total_wins[lineup.signature]["TIES"] = total_wins[lineup.signature]["TIES"] + 1
 
     return total_wins

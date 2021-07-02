@@ -142,6 +142,27 @@ class Player:
         random_turnovers = numpy.random.normal(
             loc=self.average_turnovers, scale=self.std_dev_turnovers)
 
+        if random_3pm < 0:
+            random_3pm = 0
+
+        if random_pts < 0:
+            random_pts = 0
+
+        if random_rebounds < 0:
+            random_rebounds = 0
+
+        if random_assists < 0:
+            random_assists = 0
+
+        if random_steals < 0:
+            random_steals = 0
+
+        if random_blocks < 0:
+            random_blocks = 0
+
+        if random_turnovers < 0:
+            random_turnovers = 0
+
         total_points = 0
         total_points += 1 * random_pts
         total_points += .5 * random_3pm
