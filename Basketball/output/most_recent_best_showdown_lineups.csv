@@ -1,51 +1,101 @@
 ,CAPTAIN,UTIL1,UTIL2,UTIL3,UTIL4,UTIL5,PRJ,COST
-0,Khris Middleton,Jrue Holiday,John Collins,Clint Capela,Brook Lopez,Cam Reddish,209.98750000000004,49200.0
-1,Khris Middleton,Jrue Holiday,John Collins,Clint Capela,Danilo Gallinari,Cam Reddish,207.51250000000002,48000.0
-2,Khris Middleton,Jrue Holiday,Kevin Huerter,Clint Capela,Brook Lopez,Cam Reddish,203.98750000000004,49600.0
-3,Khris Middleton,Jrue Holiday,John Collins,Bogdan Bogdanovic,Brook Lopez,Cam Reddish,203.88750000000002,49600.0
-4,Khris Middleton,Jrue Holiday,Kevin Huerter,John Collins,Danilo Gallinari,Cam Reddish,203.8375,49600.0
-5,Khris Middleton,Jrue Holiday,John Collins,Brook Lopez,Danilo Gallinari,Cam Reddish,203.03750000000002,47200.0
-6,Khris Middleton,Jrue Holiday,John Collins,Clint Capela,Bobby Portis,Cam Reddish,201.5732142857143,47600.0
-7,Khris Middleton,Jrue Holiday,Bogdan Bogdanovic,Clint Capela,Brook Lopez,Cam Reddish,201.56250000000003,48400.0
-8,Khris Middleton,Jrue Holiday,Kevin Huerter,Clint Capela,Danilo Gallinari,Cam Reddish,201.51250000000002,48400.0
-9,Khris Middleton,Jrue Holiday,John Collins,Clint Capela,Danilo Gallinari,Bobby Portis,201.4232142857143,49200.0
-10,Khris Middleton,Jrue Holiday,Bogdan Bogdanovic,Clint Capela,Brook Lopez,Danilo Gallinari,201.41250000000002,50000.0
-11,Khris Middleton,Jrue Holiday,John Collins,Bogdan Bogdanovic,Danilo Gallinari,Cam Reddish,201.4125,48400.0
-12,Khris Middleton,Jrue Holiday,John Collins,Clint Capela,Lou Williams,Cam Reddish,201.3625,48400.0
-13,Khris Middleton,Jrue Holiday,John Collins,Clint Capela,Lou Williams,Danilo Gallinari,201.2125,50000.0
-14,Khris Middleton,Jrue Holiday,Clint Capela,Brook Lopez,Danilo Gallinari,Cam Reddish,200.71250000000003,46000.0
-15,Khris Middleton,Jrue Holiday,Bogdan Bogdanovic,Clint Capela,Danilo Gallinari,Cam Reddish,199.0875,47200.0
-16,Khris Middleton,Kevin Huerter,John Collins,Clint Capela,Brook Lopez,Cam Reddish,197.93750000000003,48000.0
-17,Khris Middleton,Jrue Holiday,Kevin Huerter,John Collins,Bobby Portis,Cam Reddish,197.8982142857143,49200.0
-18,Khris Middleton,Jrue Holiday,Kevin Huerter,Bogdan Bogdanovic,Brook Lopez,Cam Reddish,197.88750000000002,50000.0
-19,Khris Middleton,Kevin Huerter,John Collins,Clint Capela,Brook Lopez,Danilo Gallinari,197.78750000000002,49600.0
-20,Khris Middleton,Jrue Holiday,Kevin Huerter,John Collins,Lou Williams,Cam Reddish,197.6875,50000.0
-21,Khris Middleton,Jrue Holiday,John Collins,Brook Lopez,Bobby Portis,Cam Reddish,197.0982142857143,46800.0
-22,Khris Middleton,Jrue Holiday,Kevin Huerter,Brook Lopez,Danilo Gallinari,Cam Reddish,197.03750000000002,47600.0
-23,Khris Middleton,Jrue Holiday,John Collins,Brook Lopez,Danilo Gallinari,Bobby Portis,196.9482142857143,48400.0
-24,Khris Middleton,Jrue Holiday,John Collins,Brook Lopez,Lou Williams,Cam Reddish,196.88750000000002,47600.0
-25,Khris Middleton,Jrue Holiday,John Collins,Brook Lopez,Lou Williams,Danilo Gallinari,196.7375,49200.0
-26,Khris Middleton,Kevin Huerter,John Collins,Bogdan Bogdanovic,Clint Capela,Cam Reddish,196.3125,49200.0
-27,Khris Middleton,Jrue Holiday,John Collins,Clint Capela,Brook Lopez,Bryn Forbes,195.83750000000003,48600.0
-28,Khris Middleton,Jrue Holiday,Kevin Huerter,Clint Capela,Bobby Portis,Cam Reddish,195.5732142857143,48000.0
-29,Khris Middleton,John Collins,Bogdan Bogdanovic,Clint Capela,Brook Lopez,Cam Reddish,195.51250000000002,46800.0
-30,Khris Middleton,Jrue Holiday,Bogdan Bogdanovic,Clint Capela,Brook Lopez,Bobby Portis,195.4732142857143,49600.0
-31,Khris Middleton,Jrue Holiday,John Collins,Bogdan Bogdanovic,Bobby Portis,Cam Reddish,195.47321428571428,48000.0
-32,Khris Middleton,Kevin Huerter,John Collins,Clint Capela,Danilo Gallinari,Cam Reddish,195.4625,46800.0
-33,Khris Middleton,Jrue Holiday,Kevin Huerter,Clint Capela,Danilo Gallinari,Bobby Portis,195.4232142857143,49600.0
-34,Khris Middleton,Jrue Holiday,Kevin Huerter,Bogdan Bogdanovic,Danilo Gallinari,Cam Reddish,195.4125,48800.0
-35,Khris Middleton,Jrue Holiday,Kevin Huerter,Clint Capela,Lou Williams,Cam Reddish,195.3625,48800.0
-36,Khris Middleton,John Collins,Bogdan Bogdanovic,Clint Capela,Brook Lopez,Danilo Gallinari,195.3625,48400.0
-37,Khris Middleton,Jrue Holiday,John Collins,Bogdan Bogdanovic,Danilo Gallinari,Bobby Portis,195.32321428571427,49600.0
-38,Khris Middleton,Jrue Holiday,John Collins,Clint Capela,Lou Williams,Bobby Portis,195.2732142857143,49600.0
-39,Khris Middleton,Jrue Holiday,John Collins,Bogdan Bogdanovic,Lou Williams,Cam Reddish,195.2625,48800.0
-40,Khris Middleton,Jrue Holiday,John Collins,Clint Capela,Lou Williams,P.J. Tucker,195.2125,49200.0
-41,Khris Middleton,Jrue Holiday,Clint Capela,Brook Lopez,Bobby Portis,Cam Reddish,194.77321428571432,45600.0
-42,Khris Middleton,John Collins,Clint Capela,Brook Lopez,Danilo Gallinari,Cam Reddish,194.6625,44400.0
-43,Khris Middleton,Jrue Holiday,Clint Capela,Brook Lopez,Danilo Gallinari,Bobby Portis,194.6232142857143,47200.0
-44,Khris Middleton,Jrue Holiday,John Collins,Danilo Gallinari,Bobby Portis,Cam Reddish,194.62321428571428,45600.0
-45,Khris Middleton,Jrue Holiday,Bogdan Bogdanovic,Brook Lopez,Danilo Gallinari,Cam Reddish,194.6125,46400.0
-46,Khris Middleton,Jrue Holiday,Clint Capela,Brook Lopez,Lou Williams,Cam Reddish,194.56250000000003,46400.0
-47,Khris Middleton,Jrue Holiday,Clint Capela,Brook Lopez,Lou Williams,Danilo Gallinari,194.41250000000002,48000.0
-48,Khris Middleton,Jrue Holiday,John Collins,Lou Williams,Danilo Gallinari,Cam Reddish,194.4125,46400.0
-49,Khris Middleton,Jrue Holiday,John Collins,Bogdan Bogdanovic,Clint Capela,Bryn Forbes,194.2125,49800.0
+0,Paul George,Devin Booker,Chris Paul,Cameron Payne,Marcus Morris Sr.,Nicolas Batum,236.73125,49000.0
+1,Paul George,Chris Paul,Deandre Ayton,Mikal Bridges,Marcus Morris Sr.,Nicolas Batum,236.28124999999997,50000.0
+2,Paul George,Chris Paul,Deandre Ayton,Reggie Jackson,Marcus Morris Sr.,Rajon Rondo,236.15624999999997,50000.0
+3,Paul George,Chris Paul,Deandre Ayton,Jae Crowder,Marcus Morris Sr.,Nicolas Batum,234.85625,48800.0
+4,Paul George,Chris Paul,Deandre Ayton,Reggie Jackson,Nicolas Batum,Rajon Rondo,234.65624999999997,49000.0
+5,Paul George,Devin Booker,Chris Paul,Patrick Beverley,Marcus Morris Sr.,Nicolas Batum,234.30624999999998,49400.0
+6,Paul George,Devin Booker,Chris Paul,Reggie Jackson,Nicolas Batum,E'Twaun Moore,234.05624999999998,50000.0
+7,Paul George,Chris Paul,Deandre Ayton,Reggie Jackson,Nicolas Batum,Dario Saric,233.98125,50000.0
+8,Paul George,Devin Booker,Chris Paul,Marcus Morris Sr.,Cameron Johnson,Nicolas Batum,232.93124999999998,48400.0
+9,Paul George,Devin Booker,Chris Paul,Reggie Jackson,Nicolas Batum,Frank Kaminsky,232.65624999999997,50000.0
+10,Paul George,Chris Paul,Deandre Ayton,Cameron Payne,Marcus Morris Sr.,Nicolas Batum,232.63125,47600.0
+11,Paul George,Chris Paul,Deandre Ayton,Jae Crowder,Cameron Payne,Marcus Morris Sr.,232.55625,50000.0
+12,Paul George,Chris Paul,Reggie Jackson,Mikal Bridges,Marcus Morris Sr.,Nicolas Batum,232.00624999999997,49400.0
+13,Paul George,Chris Paul,Deandre Ayton,Ivica Zubac,Marcus Morris Sr.,Nicolas Batum,231.92499999999998,49200.0
+14,Paul George,Chris Paul,Deandre Ayton,Reggie Jackson,Marcus Morris Sr.,E'Twaun Moore,231.45624999999998,49600.0
+15,Paul George,Devin Booker,Chris Paul,Jae Crowder,Cameron Johnson,Nicolas Batum,231.35625,49800.0
+16,Paul George,Chris Paul,Deandre Ayton,Jae Crowder,Cameron Payne,Nicolas Batum,231.05625,49000.0
+17,Paul George,Chris Paul,Deandre Ayton,Reggie Jackson,Nicolas Batum,Luke Kennard,230.80624999999998,49400.0
+18,Paul George,Devin Booker,Chris Paul,Cameron Payne,Marcus Morris Sr.,Cameron Johnson,230.63125,49600.0
+19,Paul George,Chris Paul,Reggie Jackson,Jae Crowder,Marcus Morris Sr.,Nicolas Batum,230.58124999999998,48200.0
+20,Paul George,Devin Booker,Chris Paul,Reggie Jackson,Nicolas Batum,Abdel Nader,230.57291666666663,50000.0
+21,Paul George,Devin Booker,Chris Paul,Patrick Beverley,Cameron Payne,Nicolas Batum,230.50625,49600.0
+22,Paul George,Devin Booker,Chris Paul,Reggie Jackson,Nicolas Batum,Langston Galloway,230.40624999999997,50000.0
+23,Paul George,Devin Booker,Chris Paul,DeMarcus Cousins,Marcus Morris Sr.,Nicolas Batum,230.23125,49600.0
+24,Paul George,Chris Paul,Deandre Ayton,Patrick Beverley,Marcus Morris Sr.,Nicolas Batum,230.20624999999998,48000.0
+25,Paul George,Chris Paul,Deandre Ayton,Reggie Jackson,Marcus Morris Sr.,Frank Kaminsky,230.05624999999998,49600.0
+26,Paul George,Chris Paul,Deandre Ayton,Reggie Jackson,Nicolas Batum,E'Twaun Moore,229.95624999999998,48600.0
+27,Paul George,Devin Booker,Chris Paul,Reggie Jackson,Nicolas Batum,Jevon Carter,229.50624999999997,50000.0
+28,Paul George,Devin Booker,Chris Paul,Cameron Payne,Cameron Johnson,Nicolas Batum,229.13125,48600.0
+29,Paul George,Chris Paul,Deandre Ayton,Marcus Morris Sr.,Cameron Johnson,Nicolas Batum,228.83124999999998,47000.0
+30,Paul George,Devin Booker,Deandre Ayton,Jae Crowder,Marcus Morris Sr.,Nicolas Batum,228.775,49400.0
+31,Paul George,Chris Paul,Deandre Ayton,Jae Crowder,Marcus Morris Sr.,Cameron Johnson,228.75625,49400.0
+32,Paul George,Chris Paul,Deandre Ayton,Mikal Bridges,Cameron Johnson,Nicolas Batum,228.68124999999998,49600.0
+33,Paul George,Chris Paul,Deandre Ayton,Jae Crowder,Patrick Beverley,Nicolas Batum,228.63125,49400.0
+34,Paul George,Devin Booker,Deandre Ayton,Reggie Jackson,Nicolas Batum,Rajon Rondo,228.575,49600.0
+35,Paul George,Chris Paul,Deandre Ayton,Reggie Jackson,Cameron Johnson,Rajon Rondo,228.55624999999998,49600.0
+36,Paul George,Chris Paul,Deandre Ayton,Reggie Jackson,Nicolas Batum,Frank Kaminsky,228.55624999999998,48600.0
+37,Paul George,Chris Paul,Reggie Jackson,Cameron Payne,Marcus Morris Sr.,Nicolas Batum,228.35625,47000.0
+38,Paul George,Chris Paul,Reggie Jackson,Jae Crowder,Cameron Payne,Marcus Morris Sr.,228.28125,49400.0
+39,Paul George,Devin Booker,Chris Paul,Reggie Jackson,Nicolas Batum,Amir Coffey,228.22767857142856,50000.0
+40,Paul George,Devin Booker,Chris Paul,Patrick Beverley,Marcus Morris Sr.,Cameron Johnson,228.20624999999998,50000.0
+41,Paul George,Chris Paul,Reggie Jackson,Mikal Bridges,Cameron Payne,Nicolas Batum,228.20624999999998,49600.0
+42,Paul George,Chris Paul,Deandre Ayton,Ivica Zubac,Cameron Payne,Nicolas Batum,228.125,49400.0
+43,Paul George,Devin Booker,Chris Paul,Marcus Morris Sr.,Nicolas Batum,Dario Saric,228.10625,47200.0
+44,Paul George,Devin Booker,Chris Paul,Jae Crowder,Marcus Morris Sr.,Dario Saric,228.03125,49600.0
+45,Paul George,Chris Paul,Deandre Ayton,Reggie Jackson,Marcus Morris Sr.,Abdel Nader,227.97291666666663,49600.0
+46,Paul George,Devin Booker,Chris Paul,Mikal Bridges,Nicolas Batum,Dario Saric,227.95624999999998,49800.0
+47,Paul George,Chris Paul,Deandre Ayton,Patrick Beverley,Cameron Payne,Marcus Morris Sr.,227.90625,49200.0
+48,Paul George,Devin Booker,Chris Paul,Reggie Jackson,Dario Saric,Rajon Rondo,227.83124999999998,49800.0
+49,Paul George,Chris Paul,Deandre Ayton,Reggie Jackson,Marcus Morris Sr.,Langston Galloway,227.80624999999998,49600.0
+50,Paul George,Chris Paul,Reggie Jackson,Terance Mann,Marcus Morris Sr.,Nicolas Batum,227.73125,47800.0
+51,Paul George,Chris Paul,Deandre Ayton,Reggie Jackson,Cameron Payne,E'Twaun Moore,227.65625,49800.0
+52,Paul George,Chris Paul,Reggie Jackson,Ivica Zubac,Marcus Morris Sr.,Nicolas Batum,227.64999999999998,48600.0
+53,Paul George,Devin Booker,Chris Paul,Deandre Ayton,Dario Saric,E'Twaun Moore,227.40625,50000.0
+54,Paul George,Chris Paul,Deandre Ayton,Jae Crowder,Cameron Johnson,Nicolas Batum,227.25625,48400.0
+55,Paul George,Chris Paul,Deandre Ayton,Reggie Jackson,Marcus Morris Sr.,Jevon Carter,226.90624999999997,49600.0
+56,Paul George,Chris Paul,Reggie Jackson,Jae Crowder,Cameron Payne,Nicolas Batum,226.78125,48400.0
+57,Paul George,Devin Booker,Chris Paul,Patrick Beverley,Cameron Johnson,Nicolas Batum,226.70624999999998,49000.0
+58,Paul George,Devin Booker,Deandre Ayton,Cameron Payne,Marcus Morris Sr.,Nicolas Batum,226.55,48200.0
+59,Paul George,Devin Booker,Chris Paul,Jae Crowder,Nicolas Batum,Dario Saric,226.53125,48600.0
+60,Paul George,Chris Paul,Deandre Ayton,Cameron Payne,Marcus Morris Sr.,Cameron Johnson,226.53125,48200.0
+61,Paul George,Chris Paul,Deandre Ayton,Reggie Jackson,Nicolas Batum,Abdel Nader,226.47291666666663,48600.0
+62,Paul George,Devin Booker,Chris Paul,DeMarcus Cousins,Cameron Payne,Nicolas Batum,226.43125,49800.0
+63,Paul George,Chris Paul,Deandre Ayton,Patrick Beverley,Cameron Payne,Nicolas Batum,226.40625,48200.0
+64,Paul George,Chris Paul,Deandre Ayton,Reggie Jackson,Nicolas Batum,Langston Galloway,226.30624999999998,48600.0
+65,Paul George,Chris Paul,Deandre Ayton,Reggie Jackson,Cameron Payne,Frank Kaminsky,226.25625,49800.0
+66,Paul George,Chris Paul,Reggie Jackson,Jae Crowder,Terance Mann,Nicolas Batum,226.15625,49200.0
+67,Paul George,Chris Paul,Deandre Ayton,DeMarcus Cousins,Marcus Morris Sr.,Nicolas Batum,226.13125,48200.0
+68,Paul George,Chris Paul,Reggie Jackson,Ivica Zubac,Jae Crowder,Nicolas Batum,226.075,50000.0
+69,Paul George,Devin Booker,Chris Paul,Deandre Ayton,Dario Saric,Frank Kaminsky,226.00625,50000.0
+70,Paul George,Chris Paul,Reggie Jackson,Patrick Beverley,Marcus Morris Sr.,Nicolas Batum,225.93124999999998,47400.0
+71,Paul George,Devin Booker,Reggie Jackson,Mikal Bridges,Marcus Morris Sr.,Nicolas Batum,225.92499999999998,50000.0
+72,Paul George,Chris Paul,Reggie Jackson,Mikal Bridges,Marcus Morris Sr.,Cameron Johnson,225.90624999999997,50000.0
+73,Paul George,Chris Paul,Reggie Jackson,Jae Crowder,Patrick Beverley,Marcus Morris Sr.,225.85625,49800.0
+74,Paul George,Devin Booker,Deandre Ayton,Ivica Zubac,Marcus Morris Sr.,Nicolas Batum,225.84375,49800.0
+75,Paul George,Chris Paul,Deandre Ayton,Ivica Zubac,Marcus Morris Sr.,Cameron Johnson,225.825,49800.0
+76,Paul George,Devin Booker,Chris Paul,Cameron Payne,Marcus Morris Sr.,Dario Saric,225.80625,48400.0
+77,Paul George,Chris Paul,Reggie Jackson,Mikal Bridges,Patrick Beverley,Nicolas Batum,225.78124999999997,50000.0
+78,Paul George,Chris Paul,Deandre Ayton,Ivica Zubac,Patrick Beverley,Nicolas Batum,225.7,49800.0
+79,Paul George,Chris Paul,Deandre Ayton,Reggie Jackson,Marcus Morris Sr.,Amir Coffey,225.62767857142856,49600.0
+80,Paul George,Chris Paul,Reggie Jackson,Terance Mann,Cameron Payne,Marcus Morris Sr.,225.43125,49000.0
+81,Paul George,Devin Booker,Chris Paul,Mikal Bridges,Marcus Morris Sr.,E'Twaun Moore,225.43124999999998,49400.0
+82,Paul George,Chris Paul,Deandre Ayton,Reggie Jackson,Nicolas Batum,Jevon Carter,225.40624999999997,48600.0
+83,Paul George,Devin Booker,Chris Paul,Terance Mann,Marcus Morris Sr.,Torrey Craig,225.35625,47800.0
+84,Paul George,Chris Paul,Deandre Ayton,Mikal Bridges,Marcus Morris Sr.,Dario Saric,225.35625,49400.0
+85,Paul George,Chris Paul,Reggie Jackson,Ivica Zubac,Cameron Payne,Marcus Morris Sr.,225.35,49800.0
+86,Paul George,Devin Booker,Chris Paul,Ivica Zubac,Marcus Morris Sr.,Dario Saric,225.1,50000.0
+87,Paul George,Chris Paul,Deandre Ayton,Cameron Payne,Cameron Johnson,Nicolas Batum,225.03125,47200.0
+88,Paul George,Devin Booker,Deandre Ayton,Jae Crowder,Cameron Payne,Nicolas Batum,224.97500000000002,49600.0
+89,Paul George,Chris Paul,Deandre Ayton,Jae Crowder,Cameron Payne,Cameron Johnson,224.95625,49600.0
+90,Paul George,Devin Booker,Chris Paul,Marcus Morris Sr.,Nicolas Batum,Luke Kennard,224.93124999999998,46600.0
+91,Paul George,Devin Booker,Chris Paul,Jae Crowder,Marcus Morris Sr.,Luke Kennard,224.85625,49000.0
+92,Paul George,Devin Booker,Chris Paul,Mikal Bridges,Nicolas Batum,Luke Kennard,224.78124999999997,49200.0
+93,Paul George,Devin Booker,Deandre Ayton,Reggie Jackson,Nicolas Batum,Luke Kennard,224.725,50000.0
+94,Paul George,Chris Paul,Deandre Ayton,Reggie Jackson,Cameron Johnson,Luke Kennard,224.70624999999998,50000.0
+95,Paul George,Devin Booker,Chris Paul,Reggie Jackson,Luke Kennard,Rajon Rondo,224.65624999999997,49200.0
+96,Paul George,Chris Paul,Deandre Ayton,Jae Crowder,DeMarcus Cousins,Nicolas Batum,224.55625,49600.0
+97,Paul George,Chris Paul,Reggie Jackson,Marcus Morris Sr.,Cameron Johnson,Nicolas Batum,224.55624999999998,46400.0
+98,Paul George,Devin Booker,Reggie Jackson,Jae Crowder,Marcus Morris Sr.,Nicolas Batum,224.5,48800.0
+99,Paul George,Chris Paul,Reggie Jackson,Jae Crowder,Marcus Morris Sr.,Cameron Johnson,224.48125,48800.0

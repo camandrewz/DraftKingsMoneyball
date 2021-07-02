@@ -5,7 +5,7 @@ import bisect
 top_n_lineups = []
 top_n_lineups_showdown = []
 
-n = 50
+n = 100
 
 '''
 
@@ -140,6 +140,7 @@ def create_best_lineups(final_dataFrame, point_guards, shooting_guards, small_fo
 
 def create_best_lineups_showdown(all_players):
 
+    print("\n")
     print("Creating Lineups...")
 
     signatures = {}
@@ -179,6 +180,7 @@ def create_best_lineups_showdown(all_players):
                             if(sig in signatures):
                                 continue
                             else:
+
                                 signatures[sig] = True
 
                             if ((captain.salary * 1.5) + util1.salary + util2.salary + util3.salary + util4.salary + util5.salary) > 50000:
@@ -203,7 +205,7 @@ def create_best_lineups_showdown(all_players):
                             '''
 
                             current_lineup = Lineup.Lineup(
-                                captain, util1, util2, util3, util4, util5)
+                                captain, util1, util2, util3, util4, util5, sig)
                             current_lineup.set_total_cost()
                             current_lineup.set_projection()
 
@@ -218,3 +220,40 @@ def create_best_lineups_showdown(all_players):
 
     print("Total Valid Lineups Checked: ", current_iteration)
     return top_n_lineups_showdown
+
+
+def monte_carlo_simulations(top_lineups, num_simulations):
+
+    total_wins = {}
+
+    for lineup in top_lineups:
+        total_wins.update({lineup.signature: 0})
+
+    for simulation in range(0, num_simulations):
+
+        previous_matches = {}
+
+        for lineup in top_lineups:
+            lineup.set_random_projection()
+
+        for lineup in top_lineups:
+            for lineup2 in top_lineups:
+
+                combined_hash = [lineup.signature, lineup2.signature]
+                combined_hash.sort()
+                combined_hash_str = combined_hash[0] + combined_hash[1]
+
+                if combined_hash_str in previous_matches:
+                    continue
+                else:
+                    previous_matches.update({combined_hash_str: True})
+
+                if lineup.signature == lineup2.signature:
+                    continue
+
+                if lineup.random_projection > lineup2.random_projection:
+                    total_wins[lineup.signature] = total_wins[lineup.signature] + 1
+                else:
+                    total_wins[lineup2.signature] = total_wins[lineup2.signature] + 1
+
+    return total_wins

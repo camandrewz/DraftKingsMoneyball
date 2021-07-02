@@ -9,7 +9,7 @@ from nba_api.stats.static import players
 from nba_api.stats.endpoints import playergamelogs
 
 # Download CSV Per Competition and Import it Here
-roster = pd.read_csv('Basketball\data\DKSalaries(6).csv')
+roster = pd.read_csv('Basketball\data\DKSalaries(4).csv')
 
 # Iterate through rows adding each player to a list of player objects 'all_players'
 print("Processing CSV file...")
@@ -224,4 +224,44 @@ for lineup in top_lineups:
 print('\n')
 print("Best Lineups Ranked: \n")
 results.to_csv('Basketball\output\most_recent_best_showdown_lineups.csv')
-print(results.head(10))
+print(results)
+
+print("\n")
+print("Running 10,000 Monte Carlo Simulation...")
+
+num_sims = 1000
+
+monte_carlo_results_dict = Optimization.monte_carlo_simulations(
+    top_lineups, num_sims)
+
+monte_carlo_results = DataFrame(columns=[
+    "CAPTAIN",
+    "UTIL1",
+    "UTIL2",
+    "UTIL3",
+    "UTIL4",
+    "UTIL5",
+    "WINS",
+    "WIN PCT",
+    "COST"
+])
+
+for lineup in top_lineups:
+    monte_carlo_results = monte_carlo_results.append({
+        "CAPTAIN": lineup.captain.name,
+        "UTIL1": lineup.util1.name,
+        "UTIL2": lineup.util2.name,
+        "UTIL3": lineup.util3.name,
+        "UTIL4": lineup.util4.name,
+        "UTIL5": lineup.util5.name,
+        "WINS": monte_carlo_results_dict[lineup.signature],
+        "WIN PCT": monte_carlo_results_dict[lineup.signature]/(num_sims * (len(top_lineups) - 1)),
+        "COST": lineup.cost
+    }, ignore_index=True)
+
+monte_carlo_results = monte_carlo_results.sort_values(
+    by=['WIN PCT'], ascending=False, ignore_index=True)
+
+print('\n')
+print("Best Peforming Lineups Ranked: \n")
+print(monte_carlo_results)
