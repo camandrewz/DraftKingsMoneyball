@@ -13,6 +13,9 @@ class Lineup:
     def __lt__(self, other):
         return (self.projection > other.projection)
 
+    def set_monte_carlo_results(self, win_pct):
+        self.monte_carlo_win_pct = win_pct
+
     def set_total_cost(self):
         self.cost = (self.captain.salary * 1.5) + self.util1.salary + \
             self.util2.salary + self.util3.salary + self.util4.salary + self.util5.salary

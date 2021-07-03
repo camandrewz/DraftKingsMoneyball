@@ -47,10 +47,11 @@ def add_to_top_lineups(lineup, showdown):
 
 def create_signature(captain, util1, util2, util3, util4, util5):
 
-    names = [captain, util1, util2, util3, util4, util5]
+    names = [util1, util2, util3, util4, util5]
     names.sort()
 
-    unencoded_str = names[0] + names[1] + names[2] + names[3] + names[4]
+    unencoded_str = captain + names[0] + \
+        names[1] + names[2] + names[3] + names[4]
 
     encodedStr = hashlib.md5(unencoded_str.encode()).hexdigest()
 
@@ -227,7 +228,8 @@ def monte_carlo_simulations(top_lineups, num_simulations):
     total_wins = {}
 
     for lineup in top_lineups:
-        total_wins.update({lineup.signature: {"WINS":0, "LOSSES":0, "TIES":0}})
+        total_wins.update(
+            {lineup.signature: {"WINS": 0, "LOSSES": 0, "TIES": 0}})
 
     for simulation in range(0, num_simulations):
 

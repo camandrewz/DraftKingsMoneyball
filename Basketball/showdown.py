@@ -2,6 +2,7 @@ import time
 import math
 import pandas as pd
 from pandas.core.frame import DataFrame
+from functools import cmp_to_key
 from src import Player
 from src import ExpectedValues
 from src import Optimization
@@ -63,7 +64,7 @@ for player in roster.values:
     else:
         id = player_api[0]['id']
 
-    new_player = Player.Player(player[2], player[0], player[5], id)
+    new_player = Player.Player(player[2], player[0], player[5], id, player[3])
     all_players.append(new_player)
 
 
@@ -230,7 +231,7 @@ print(results)
 num_sims = 1000
 
 print("\n")
-print("Running ", num_sims, "Monte Carlo Simulation...")
+print("Running ", num_sims, "Monte Carlo Simulations...")
 
 monte_carlo_results_dict = Optimization.monte_carlo_simulations(
     top_lineups, num_sims)
@@ -247,8 +248,14 @@ monte_carlo_results = DataFrame(columns=[
     "WIN PCT",
     "COST"
 ])
+monte_carlo_results.to_csv(
+    'Basketball\output\most_recent_monte_carlo_showdown_lineups.csv')
 
 for lineup in top_lineups:
+
+    lineup.set_monte_carlo_results(
+        monte_carlo_results_dict[lineup.signature]["WINS"]/(num_sims * (len(top_lineups) - 1)))
+
     monte_carlo_results = monte_carlo_results.append({
         "CAPTAIN": lineup.captain.name,
         "UTIL1": lineup.util1.name,
@@ -268,3 +275,49 @@ monte_carlo_results = monte_carlo_results.sort_values(
 print('\n')
 print("Best Peforming Lineups Ranked: \n")
 print(monte_carlo_results)
+
+print('\n')
+print("Exporting to DrafKings Template...")
+
+draft_kings_lineups = DataFrame(columns=[
+    "CPT",
+    "UTIL1",
+    "UTIL2",
+    "UTIL3",
+    "UTIL4",
+    "UTIL5"
+])
+
+num_lineups_wanted = 20
+
+
+def compare_monte_carlo(lineup1, lineup2):
+    return lineup1.monte_carlo_win_pct > lineup2.monte_carlo_win_pct
+
+
+top_lineups = sorted(top_lineups, key=cmp_to_key(compare_monte_carlo))
+
+for index, lineup in enumerate(top_lineups):
+
+    if index < num_lineups_wanted:
+
+        draft_kings_lineups = draft_kings_lineups.append({
+            "CPT": lineup.captain.dk_id,
+            "UTIL1": lineup.util1.dk_id,
+            "UTIL2": lineup.util2.dk_id,
+            "UTIL3": lineup.util3.dk_id,
+            "UTIL4": lineup.util4.dk_id,
+            "UTIL5": lineup.util5.dk_id
+        }, ignore_index=True)
+
+
+draft_kings_lineups.rename(columns={"UTIL1": "UTIL", "UTIL2": "UTIL",
+                           "UTIL3": "UTIL", "UTIL4": "UTIL", "UTIL5": "UTIL"}, inplace=True)
+
+draft_kings_lineups.reset_index(drop=True, inplace=True)
+
+draft_kings_lineups.to_csv(
+    'Basketball\output\draftKings_lineups_for_import.csv')
+
+print("\n")
+print("All Done!")

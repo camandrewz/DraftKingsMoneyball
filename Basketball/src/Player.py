@@ -1,14 +1,17 @@
 import numpy
+import matplotlib.pyplot as plt
+from scipy.stats import norm
 
 
 class Player:
 
-    def __init__(self, full_name, position, salary, id):
+    def __init__(self, full_name, position, salary, id, dk_id):
 
         self.name = full_name
         self.position = position
         self.salary = salary
         self.api_id = id
+        self.dk_id = dk_id
 
     def set_expected_threes(self, threes):
         self.expected_3pm = threes
@@ -126,6 +129,11 @@ class Player:
         self.expected_fantasy_points = total_points
 
     def set_random_fantasy_points(self):
+
+        #x_axis = numpy.arange(-50, 50, 1)
+        #plt.plot(x_axis, norm.pdf(x_axis, self.average_pts, self.std_dev_pts), label=self.name)
+        # plt.legend()
+        # plt.show()
 
         random_3pm = numpy.random.normal(
             loc=self.average_3pm, scale=self.std_dev_3pm)
