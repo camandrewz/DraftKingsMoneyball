@@ -10,7 +10,7 @@ from nba_api.stats.static import players
 from nba_api.stats.endpoints import playergamelogs
 
 # Download CSV Per Competition and Import it Here
-roster = pd.read_csv('Basketball\data\DKSalaries(7).csv')
+roster = pd.read_csv('Basketball\data\DKSalaries(1).csv')
 
 # Iterate through rows adding each player to a list of player objects 'all_players'
 print("Processing CSV file...")
@@ -33,25 +33,9 @@ for player in roster.values:
     if (player[4] == 'CPT'):
         continue
 
-    # if (player[2] == "Trae Young"):
-    #    continue
-
-    if (player[2] == "Brandon Goodwin"):
-        continue
+    # Currently have to manually drop injured players from joining the roster. Hoping to find solution to this.
 
     if (player[2] == "Donte DiVincenzo"):
-        continue
-
-    if (player[2] == "De'Andre Hunter"):
-        continue
-
-    if (player[2] == "Patrick Patterson"):
-        continue
-
-    if (player[2] == "Serge Ibaka"):
-        continue
-
-    if (player[2] == "Kawhi Leonard"):
         continue
 
     if (player[2] == "Giannis Antetokounmpo"):
@@ -315,8 +299,11 @@ for index, lineup in enumerate(top_lineups):
 draft_kings_lineups.rename(columns={"UTIL1": "UTIL", "UTIL2": "UTIL",
                            "UTIL3": "UTIL", "UTIL4": "UTIL", "UTIL5": "UTIL"}, inplace=True)
 
+# Dropping the Index Column
+draft_kings_lineups = draft_kings_lineups.iloc[:, 1:]
+
 draft_kings_lineups.to_csv(
-    'Basketball\output\draftKings_lineups_for_import.csv', index_label=False)
+    'Basketball\output\draftKings_lineups_for_import.csv')
 
 print("\n")
 print("All Done!")
