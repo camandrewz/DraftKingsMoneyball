@@ -315,10 +315,8 @@ for index, lineup in enumerate(top_lineups):
 draft_kings_lineups.rename(columns={"UTIL1": "UTIL", "UTIL2": "UTIL",
                            "UTIL3": "UTIL", "UTIL4": "UTIL", "UTIL5": "UTIL"}, inplace=True)
 
-draft_kings_lineups.reset_index(drop=True, inplace=True)
-
 draft_kings_lineups.to_csv(
-    'Basketball\output\draftKings_lineups_for_import.csv')
+    'Basketball\output\draftKings_lineups_for_import.csv', index_label=False)
 
 print("\n")
 print("All Done!")
