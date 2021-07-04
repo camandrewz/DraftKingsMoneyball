@@ -9,6 +9,8 @@ Approach:
 - Run a Monte Carlo simulation by randomly selected individual player statistics from the normal distribution of their past performance in each category.
 - Display the best performing teams after the simulation ends.
 
+
+
 How to Use:
 (Currently only works for NBA contests)
 - Download the CSV of your respective contest on DraftKings (Should be an "Export to CSV" button on the page to draft your team)
