@@ -27,6 +27,13 @@ class Lineup:
             self.util3.expected_fantasy_points + \
             self.util4.expected_fantasy_points + self.util5.expected_fantasy_points
 
+    def set_projection_by_minutes(self):
+
+        self.projection_by_min = (self.captain.expected_prj_min * 1.5) + self.util1.expected_prj_min + \
+            self.util2.expected_prj_min + \
+            self.util3.expected_prj_min + \
+            self.util4.expected_prj_min + self.util5.expected_prj_min
+
     def set_random_projection(self):
 
         self.captain.set_random_fantasy_points()

@@ -1,8 +1,8 @@
 import time
-import math
 import pandas as pd
 from pandas.core.frame import DataFrame
 from functools import cmp_to_key
+from alive_progress import alive_bar
 from src import Player
 from src import ExpectedValues
 from src import Optimization
@@ -13,6 +13,7 @@ from nba_api.stats.endpoints import playergamelogs
 roster = pd.read_csv('Basketball\data\DKSalaries(1).csv')
 
 # Iterate through rows adding each player to a list of player objects 'all_players'
+print("\n")
 print("Processing CSV file...")
 all_players = []
 
@@ -68,63 +69,66 @@ Triple-Double: +3
 
 print("Calculating Expected Values...")
 
-for player in all_players:
+with alive_bar(len(all_players), bar="smooth", spinner="ball_scrolling") as bar:
+    for player in all_players:
 
-    id = player.api_id
+        id = player.api_id
 
-    logs = playergamelogs.PlayerGameLogs(
-        player_id_nullable=id, season_nullable="2020-21", season_type_nullable="Playoffs", last_n_games_nullable=10)
+        logs = playergamelogs.PlayerGameLogs(
+            player_id_nullable=id, season_nullable="2020-21", season_type_nullable="Playoffs", last_n_games_nullable=10)
 
-    df = logs.get_data_frames()
+        df = logs.get_data_frames()
 
-    new_df = DataFrame(columns=[
-        "SEASON_YEAR",
-        "PLAYER_ID",
-        "PLAYER_NAME",
-        "GAME_ID",
-        "MIN",
-        "FG3M",
-        "REB",
-        "AST",
-        "TOV",
-        "STL",
-        "BLK",
-        "PTS",
-    ])
+        new_df = DataFrame(columns=[
+            "SEASON_YEAR",
+            "PLAYER_ID",
+            "PLAYER_NAME",
+            "GAME_ID",
+            "MIN",
+            "FG3M",
+            "REB",
+            "AST",
+            "TOV",
+            "STL",
+            "BLK",
+            "PTS",
+        ])
 
-    global team_id
+        global team_id
 
-    for game in df[0].values:
+        for game in df[0].values:
 
-        team_id = game[4]
+            team_id = game[4]
 
-        new_df = new_df.append({
-            "SEASON_YEAR": game[0],
-            "PLAYER_ID": game[1],
-            "PLAYER_NAME": game[2],
-            "GAME_ID": game[7],
-            "MIN": game[11],
-            "FG3M": game[15],
-            "REB": game[23],
-            "AST": game[24],
-            "TOV": game[25],
-            "STL": game[26],
-            "BLK": game[27],
-            "PTS": game[31]
-        }, ignore_index=True)
+            new_df = new_df.append({
+                "SEASON_YEAR": game[0],
+                "PLAYER_ID": game[1],
+                "PLAYER_NAME": game[2],
+                "GAME_ID": game[7],
+                "MIN": game[11],
+                "FG3M": game[15],
+                "REB": game[23],
+                "AST": game[24],
+                "TOV": game[25],
+                "STL": game[26],
+                "BLK": game[27],
+                "PTS": game[31]
+            }, ignore_index=True)
 
-    ExpectedValues.calculate_threes(player, new_df)
-    ExpectedValues.calculate_pts(player, new_df)
-    ExpectedValues.calculate_rebounds(player, new_df)
-    ExpectedValues.calculate_assists(player, new_df)
-    ExpectedValues.calculate_steals(player, new_df)
-    ExpectedValues.calculate_blocks(player, new_df)
-    ExpectedValues.calculate_turnovers(player, new_df)
-    ExpectedValues.calculate_minutes(player, new_df, team_id)
-    player.set_doubles()
-    player.set_expected_fantasy_points()
+        ExpectedValues.calculate_threes(player, new_df)
+        ExpectedValues.calculate_pts(player, new_df)
+        ExpectedValues.calculate_rebounds(player, new_df)
+        ExpectedValues.calculate_assists(player, new_df)
+        ExpectedValues.calculate_steals(player, new_df)
+        ExpectedValues.calculate_blocks(player, new_df)
+        ExpectedValues.calculate_turnovers(player, new_df)
+        ExpectedValues.calculate_minutes(player, new_df, team_id)
+        player.set_doubles()
+        player.set_expected_fantasy_points()
 
-    time.sleep(.600)
+        time.sleep(.600)
+
+        bar()
 
 
 final_dataFrame = DataFrame(columns=[
@@ -152,6 +156,9 @@ for player in all_players:
         if (roster_entry[2] == player.name):
             salary = roster_entry[5]
 
+    player.set_expected_prj_min(
+        ((player.expected_minutes * player.expected_fantasy_points)/1000))
+
     final_dataFrame = final_dataFrame.append({
         "PLAYER_NAME": player.name,
         "POS": player.position,
@@ -167,12 +174,13 @@ for player in all_players:
         "SALARY": salary,
         "PRJ": player.expected_fantasy_points,
         "MINUTES": player.expected_minutes,
-        "PRJ*MIN": ((player.expected_minutes * player.expected_fantasy_points)/1000)
+        "PRJ*MIN": player.expected_prj_min
     }, ignore_index=True)
 
 final_dataFrame = final_dataFrame.sort_values(
     by=['PRJ'], ascending=False, ignore_index=True)
 
+print("\n")
 print("All Expected Values: \n")
 final_dataFrame.to_csv(
     'Basketball\output\most_recent_showdown_projections.csv')
@@ -189,7 +197,7 @@ results = DataFrame(columns=[
     "UTIL4",
     "UTIL5",
     "PRJ",
-    # "PRJ*MIN",
+    "PRJ*MIN",
     "COST"
 ])
 
@@ -202,7 +210,7 @@ for lineup in top_lineups:
         "UTIL4": lineup.util4.name,
         "UTIL5": lineup.util5.name,
         "PRJ": lineup.projection,
-        # "PRJ*MIN": lineup.get("PRJ*MIN"),
+        "PRJ*MIN": lineup.projection_by_min,
         "COST": lineup.cost
     }, ignore_index=True)
 
@@ -212,10 +220,7 @@ results.to_csv('Basketball\output\most_recent_best_showdown_lineups.csv')
 print(results)
 
 
-num_sims = 1000
-
-print("\n")
-print("Running ", num_sims, "Monte Carlo Simulations...")
+num_sims = 5000
 
 monte_carlo_results_dict = Optimization.monte_carlo_simulations(
     top_lineups, num_sims)
@@ -299,11 +304,8 @@ for index, lineup in enumerate(top_lineups):
 draft_kings_lineups.rename(columns={"UTIL1": "UTIL", "UTIL2": "UTIL",
                            "UTIL3": "UTIL", "UTIL4": "UTIL", "UTIL5": "UTIL"}, inplace=True)
 
-# Dropping the Index Column
-draft_kings_lineups = draft_kings_lineups.iloc[:, 1:]
-
 draft_kings_lineups.to_csv(
-    'Basketball\output\draftKings_lineups_for_import.csv')
+    'Basketball\output\draftKings_lineups_for_import.csv', index=False)
 
 print("\n")
 print("All Done!")

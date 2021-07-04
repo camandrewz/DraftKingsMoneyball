@@ -1,11 +1,14 @@
 from src import Lineup
 import hashlib
 import bisect
+import math
+from alive_progress import alive_bar
+from itertools import combinations
 
 top_n_lineups = []
 top_n_lineups_showdown = []
 
-n = 250
+n = 200
 
 '''
 
@@ -144,80 +147,38 @@ def create_best_lineups_showdown(all_players):
     print("\n")
     print("Creating Lineups...")
 
-    signatures = {}
+    num_lineups = len(all_players) * math.comb((len(all_players) - 1), 5)
 
     current_iteration = 1
 
-    for captain in all_players:
+    with alive_bar(num_lineups, bar="smooth", spinner="ball_scrolling") as bar:
 
-        for util1 in all_players:
+        for captain in all_players:
 
-            if (util1.name == captain.name):
-                continue
+            temp_all_players = all_players.copy()
+            temp_all_players.remove(captain)
 
-            for util2 in all_players:
+            lineup_combos = combinations(temp_all_players, 5)
 
-                if (util2.name == util1.name or util2.name == captain.name):
+            for lineup in list(lineup_combos):
+
+                sig = create_signature(
+                    captain.name, lineup[0].name, lineup[1].name, lineup[2].name, lineup[3].name, lineup[4].name)
+
+                bar()
+
+                if ((captain.salary * 1.5) + lineup[0].salary + lineup[1].salary + lineup[2].salary + lineup[3].salary + lineup[4].salary) > 50000:
                     continue
 
-                for util3 in all_players:
+                current_iteration += 1
 
-                    if (util3.name == util1.name or util3.name == util2.name or util3.name == captain.name):
-                        continue
+                current_lineup = Lineup.Lineup(
+                    captain, lineup[0], lineup[1], lineup[2], lineup[3], lineup[4], sig)
+                current_lineup.set_total_cost()
+                current_lineup.set_projection()
+                current_lineup.set_projection_by_minutes()
 
-                    for util4 in all_players:
-
-                        if (util4.name == util1.name or util4.name == util2.name or util4.name == util3.name or util4.name == captain.name):
-                            continue
-
-                        for util5 in all_players:
-
-                            if (util5.name == util1.name or util5.name == util2.name or util5.name == util3.name or util5.name == util4.name or util5.name == captain.name):
-                                continue
-
-                            sig = create_signature(
-                                captain.name, util1.name, util2.name, util3.name, util4.name, util5.name)
-
-                            if(sig in signatures):
-                                continue
-                            else:
-
-                                signatures[sig] = True
-
-                            if ((captain.salary * 1.5) + util1.salary + util2.salary + util3.salary + util4.salary + util5.salary) > 50000:
-                                continue
-
-                            current_iteration += 1
-
-                            if (current_iteration % 10000 == 0):
-                                print(
-                                    "Current Lineup #: " + str(current_iteration))
-
-                            '''
-
-                            current_lineup = {"CAPTAIN": {"NAME": captain[0], "PRJ": (captain[12] * 1.5), "SALARY": (captain.salary * 1.5)},
-                                              "UTIL1": {"NAME": util1[0], "PRJ": util1[12], "SALARY": util1.salary},
-                                              "UTIL2": {"NAME": util2[0], "PRJ": util2[12], "SALARY": util2.salary},
-                                              "UTIL3": {"NAME": util3[0], "PRJ": util3[12], "SALARY": util3.salary},
-                                              "UTIL4": {"NAME": util4[0], "PRJ": util4[12], "SALARY": util4.salary},
-                                              "UTIL5": {"NAME": util5[0], "PRJ": util5[12], "SALARY": util5.salary},
-                                              "PRJ": 0, "PRJ*MIN": 0, "COST": 0}
-
-                            '''
-
-                            current_lineup = Lineup.Lineup(
-                                captain, util1, util2, util3, util4, util5, sig)
-                            current_lineup.set_total_cost()
-                            current_lineup.set_projection()
-
-                            '''
-
-                            current_lineup["PRJ*MIN"] = (
-                                captain[13] * 1.5) + util1[13] + util2[13] + util3[13] + util4[13] + util5[13]
-
-                            '''
-
-                            add_to_top_lineups(current_lineup, True)
+                add_to_top_lineups(current_lineup, True)
 
     print("Total Valid Lineups Checked: ", current_iteration)
     return top_n_lineups_showdown
@@ -225,21 +186,29 @@ def create_best_lineups_showdown(all_players):
 
 def monte_carlo_simulations(top_lineups, num_simulations):
 
+    print("\n")
+    print("Running", num_simulations, "Monte Carlo Simulations...")
+
     total_wins = {}
+
+    total_games_to_be_played = int((
+        num_simulations * len(top_lineups) * (len(top_lineups) - 1))/2)
 
     for lineup in top_lineups:
         total_wins.update(
             {lineup.signature: {"WINS": 0, "LOSSES": 0, "TIES": 0}})
 
-    for simulation in range(0, num_simulations):
+    with alive_bar(total_games_to_be_played, bar="smooth", spinner="ball_scrolling") as bar:
+        for simulation in range(0, num_simulations):
 
-        previous_matches = {}
+            previous_matches = {}
 
-        for lineup in top_lineups:
-            lineup.set_random_projection()
+            for lineup in top_lineups:
+                lineup.set_random_projection()
 
-        for lineup in top_lineups:
-            for lineup2 in top_lineups:
+            matchups = combinations(top_lineups, 2)
+
+            for lineup, lineup2 in matchups:
 
                 if lineup.signature == lineup2.signature:
                     continue
@@ -262,5 +231,7 @@ def monte_carlo_simulations(top_lineups, num_simulations):
                 elif lineup.random_projection == lineup2.random_projection:
                     total_wins[lineup2.signature]["TIES"] = total_wins[lineup2.signature]["TIES"] + 1
                     total_wins[lineup.signature]["TIES"] = total_wins[lineup.signature]["TIES"] + 1
+
+                bar()
 
     return total_wins

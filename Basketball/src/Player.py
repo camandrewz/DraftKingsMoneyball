@@ -78,6 +78,9 @@ class Player:
 
     def set_expected_minutes(self, mins):
         self.expected_minutes = mins
+    
+    def set_expected_prj_min(self, prj_min):
+        self.expected_prj_min = prj_min
 
     def set_doubles(self):
 
