@@ -9,8 +9,7 @@ A Quantitative Approach to DraftKings Daily Fantasy Sports
 - Run a Monte Carlo simulation by randomly selected individual player statistics from the normal distribution of their past performance in each category.
 - Display the best performing teams after the simulation ends.
 
-\n
-\n
+\newline
 
 **How to Use:**
 (Currently only works for NBA contests)
