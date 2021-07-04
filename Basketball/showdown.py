@@ -248,8 +248,6 @@ monte_carlo_results = DataFrame(columns=[
     "WIN PCT",
     "COST"
 ])
-monte_carlo_results.to_csv(
-    'Basketball\output\most_recent_monte_carlo_showdown_lineups.csv')
 
 for lineup in top_lineups:
 
@@ -271,6 +269,9 @@ for lineup in top_lineups:
 
 monte_carlo_results = monte_carlo_results.sort_values(
     by=['WIN PCT'], ascending=False, ignore_index=True)
+
+monte_carlo_results.to_csv(
+    'Basketball\output\most_recent_monte_carlo_showdown_lineups.csv')
 
 print('\n')
 print("Best Peforming Lineups Ranked: \n")
