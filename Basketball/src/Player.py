@@ -1,3 +1,4 @@
+from os import stat
 import numpy
 import matplotlib.pyplot as plt
 from scipy.stats import norm
@@ -12,6 +13,14 @@ class Player:
         self.salary = salary
         self.api_id = id
         self.dk_id = dk_id
+        self.injury_status = False
+        self.ineligible = False
+
+    def set_ineligible_status(self, status):
+        self.ineligible = status
+
+    def set_injury_status(self, status):
+        self.injury_status = status
 
     def set_expected_threes(self, threes):
         self.expected_3pm = threes
@@ -78,7 +87,7 @@ class Player:
 
     def set_expected_minutes(self, mins):
         self.expected_minutes = mins
-    
+
     def set_expected_prj_min(self, prj_min):
         self.expected_prj_min = prj_min
 
@@ -133,25 +142,18 @@ class Player:
 
     def set_random_fantasy_points(self):
 
-        #x_axis = numpy.arange(-50, 50, 1)
+        #x_axis = numpy.arange(0, 50, 1)
         #plt.plot(x_axis, norm.pdf(x_axis, self.average_pts, self.std_dev_pts), label=self.name)
-        # plt.legend()
-        # plt.show()
+        #plt.legend()
+        #plt.show()
 
-        random_3pm = numpy.random.normal(
-            loc=self.average_3pm, scale=self.std_dev_3pm)
-        random_pts = numpy.random.normal(
-            loc=self.average_pts, scale=self.std_dev_pts)
-        random_rebounds = numpy.random.normal(
-            loc=self.average_rebounds, scale=self.std_dev_rebounds)
-        random_assists = numpy.random.normal(
-            loc=self.average_assists, scale=self.std_dev_assists)
-        random_steals = numpy.random.normal(
-            loc=self.average_steals, scale=self.std_dev_steals)
-        random_blocks = numpy.random.normal(
-            loc=self.average_blocks, scale=self.std_dev_blocks)
-        random_turnovers = numpy.random.normal(
-            loc=self.average_turnovers, scale=self.std_dev_turnovers)
+        random_3pm = numpy.random.normal(loc=self.average_3pm, scale=self.std_dev_3pm)
+        random_pts = numpy.random.normal(loc=self.average_pts, scale=self.std_dev_pts)
+        random_rebounds = numpy.random.normal(loc=self.average_rebounds, scale=self.std_dev_rebounds)
+        random_assists = numpy.random.normal(loc=self.average_assists, scale=self.std_dev_assists)
+        random_steals = numpy.random.normal(loc=self.average_steals, scale=self.std_dev_steals)
+        random_blocks = numpy.random.normal(loc=self.average_blocks, scale=self.std_dev_blocks)
+        random_turnovers = numpy.random.normal(loc=self.average_turnovers, scale=self.std_dev_turnovers)
 
         if random_3pm < 0:
             random_3pm = 0

@@ -8,7 +8,7 @@ from itertools import combinations
 top_n_lineups = []
 top_n_lineups_showdown = []
 
-n = 200
+n = 250
 
 '''
 

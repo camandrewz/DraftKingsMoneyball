@@ -9,6 +9,8 @@ from src import Optimization
 from nba_api.stats.static import players
 from nba_api.stats.endpoints import playergamelogs
 
+LOOKBACK = 10
+
 # Download CSV Per Competition and Import it Here
 roster = pd.read_csv('Basketball\data\DKSalaries(1).csv')
 
@@ -34,14 +36,6 @@ for player in roster.values:
     if (player[4] == 'CPT'):
         continue
 
-    # Currently have to manually drop injured players from joining the roster. Hoping to find solution to this.
-
-    if (player[2] == "Donte DiVincenzo"):
-        continue
-
-    if (player[2] == "Giannis Antetokounmpo"):
-        continue
-
     player_api = players.find_players_by_full_name(player[2])
 
     if (player_api == []):
@@ -50,6 +44,24 @@ for player in roster.values:
         id = player_api[0]['id']
 
     new_player = Player.Player(player[2], player[0], player[5], id, player[3])
+
+    # Currently have to manually drop injured players from joining the roster. Hoping to find solution to this.
+
+    if (player[2] == "Donte DiVincenzo"):
+        new_player.set_injury_status(True)
+        new_player.set_ineligible_status(True)
+        continue
+
+    if (player[2] == "Giannis Antetokounmpo"):
+        new_player.set_injury_status(True)
+        new_player.set_ineligible_status(True)
+        continue
+
+    if (player[2] == "Cameron Johnson"):
+        new_player.set_injury_status(True)
+        #new_player.set_ineligible_status(True)
+        #continue
+
     all_players.append(new_player)
 
 
@@ -75,7 +87,7 @@ with alive_bar(len(all_players), bar="smooth", spinner="ball_scrolling") as bar:
         id = player.api_id
 
         logs = playergamelogs.PlayerGameLogs(
-            player_id_nullable=id, season_nullable="2020-21", season_type_nullable="Playoffs", last_n_games_nullable=10)
+            player_id_nullable=id, season_nullable="2020-21", season_type_nullable="Playoffs", last_n_games_nullable=LOOKBACK)
 
         df = logs.get_data_frames()
 
@@ -147,7 +159,6 @@ final_dataFrame = DataFrame(columns=[
     "PRJ"
 ])
 
-
 for player in all_players:
 
     salary = 0
@@ -186,7 +197,6 @@ final_dataFrame.to_csv(
     'Basketball\output\most_recent_showdown_projections.csv')
 print(final_dataFrame)
 
-
 top_lineups = Optimization.create_best_lineups_showdown(all_players)
 
 results = DataFrame(columns=[
@@ -220,7 +230,7 @@ results.to_csv('Basketball\output\most_recent_best_showdown_lineups.csv')
 print(results)
 
 
-num_sims = 5000
+num_sims = 2000
 
 monte_carlo_results_dict = Optimization.monte_carlo_simulations(
     top_lineups, num_sims)
